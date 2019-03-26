@@ -32,5 +32,16 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>${MACOSX_BUNDLE_GUI_IDENTIFIER}</string>		
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>testtest</string>
+			</array>
+		</dict>
+	</array>	
 </dict>
 </plist>

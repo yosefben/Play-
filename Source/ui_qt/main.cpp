@@ -1,12 +1,36 @@
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QMessageBox>
 #include "mainwindow.h"
 #include "QStringUtils.h"
+
+class CCustomApplication : public QApplication
+{
+public:
+	CCustomApplication(int& argc, char* argv[])
+	: QApplication(argc, argv)
+	{
+		
+	}
+	
+	bool event(QEvent *event) override
+	{
+		if(event->type() == QEvent::FileOpen)
+		{
+			QFileOpenEvent *openEvent = static_cast<QFileOpenEvent *>(event);
+			QMessageBox::question(nullptr, "Save", openEvent->url().toString(), QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+		}
+		return QApplication::event(event);
+	}
+	
+private:
+	
+};
 
 int main(int argc, char* argv[])
 {
 	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-	QApplication a(argc, argv);
+	CCustomApplication a(argc, argv);
 
 	QCoreApplication::setApplicationName("Play!");
 	QCoreApplication::setApplicationVersion("Version: " PLAY_VERSION);
