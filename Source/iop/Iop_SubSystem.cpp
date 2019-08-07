@@ -302,10 +302,12 @@ void CSubSystem::CountTicks(int ticks)
 	}
 	{
 		bool irqPending = false;
+		static int intCount = 0;
 		irqPending |= m_spuCore0.GetIrqPending();
 		irqPending |= m_spuCore1.GetIrqPending();
-		if(irqPending)
+		if(irqPending && (intCount == 0))
 		{
+			intCount++;
 			m_intc.AssertLine(CIntc::LINE_SPU2);
 		}
 		else
