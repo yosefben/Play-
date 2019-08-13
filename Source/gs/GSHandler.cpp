@@ -718,6 +718,7 @@ void CGSHandler::WriteRegisterMassivelyImpl(const MASSIVEWRITE_INFO& massiveWrit
 
 	assert(m_transferCount != 0);
 	m_transferCount--;
+	m_drawCallCount++;
 }
 
 std::pair<uint32, uint32> CGSHandler::GetTransferInvalidationRange(const BITBLTBUF& bltBuf, const TRXREG& trxReg, const TRXPOS& trxPos)
